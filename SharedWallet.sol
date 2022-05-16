@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 contract SharedWallet{
-    event deposit(address sender, uint256 amount, uint a);
+    event deposit(address sender, uint256 amount);
     mapping(address => uint256) public allowance;
     address owner;
 
@@ -10,11 +10,11 @@ contract SharedWallet{
         owner=msg.sender;
     }
     fallback () external payable  {
-        emit deposit(msg.sender, msg.value, 1);
+        emit deposit(msg.sender, msg.value);
     }
 
     receive() external payable{
-        emit deposit(msg.sender, msg.value, 2);
+        emit deposit(msg.sender, msg.value);
     }
 
     function withdraw(uint256 _amount) public{
